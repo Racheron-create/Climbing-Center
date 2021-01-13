@@ -10,7 +10,7 @@ namespace Climbing
     class Center
     {
         //variables for object center
-        public List<Climbing.Customer> Customers { get; set; }
+        public List<Customer> Customers { get; set; }
         public Dictionary<string, List<Route>> Circuits { get; set; }
         public string Name { get; set; }
         public int CustomerCount { get; set; }
@@ -19,17 +19,17 @@ namespace Climbing
         {
             Name = name;
             CustomerCount = 0;
-            Customers = new List<Climbing.Customer>();
+            Customers = new List<Customer>();
             Circuits = new Dictionary<string, List<Route>>();
         }
 
         //creating a customer. Input validation needed
-        public void CreateCustomer()
+        public void CreateCustomer(string name, string gender, int year, int month, int day)
         {
             //add 1 to number of customers at the specific center
             CustomerCount++;
             //create the customer
-            Customers.Add(new Customer(CustomerCount));
+            Customers.Add(new Customer(CustomerCount, name, gender, year, month, day));
         }
 
         public void RemoveCustomer(int number)
@@ -51,19 +51,16 @@ namespace Climbing
         }
 
         //create circuit and add it to dictionary of all circuits for center 
-        public void NewCircuit()
+        public void NewCircuit(string colour, string[] grades)
         {
-            Circuit circuit = new Circuit();
-            string colour = circuit.Colour;
+            Circuit circuit = new Circuit(colour, grades);
             List<Route> routes = circuit.Routes;
             Circuits.Add(colour, routes);
         }
 
         //display specific circuit in a center
-        public void DisplayCircuit()
+        public void DisplayCircuit(string colour)
         {
-            Console.Write("What circuit do you want to see? ");
-            string colour = Console.ReadLine();
             if (Circuits.TryGetValue(colour, out List<Route> routes))
             {
                 routes = Circuits[colour];
@@ -79,11 +76,8 @@ namespace Climbing
             }
         }
 
-        public void DeleteCircuit()
+        public void DeleteCircuit(string colour)
         {
-            Console.Write("What colour do you want to delete? ");
-            string colour = Console.ReadLine();
-
             Circuits.Remove(colour);
             Customers.ForEach(delegate (Customer customer)
             {

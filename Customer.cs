@@ -19,24 +19,8 @@ namespace Climbing
         public int Attempts { get; set; }
         public Dictionary<string, List<string>> MySends { get; set; }
         public Dictionary<string, List<Route>> MyAttempts { get; set; }
-        public Customer(int number)
+        public Customer(int number, string name, string gender, int year, int month, int day)
         {
-            //name and gender, gender to be enum?
-            Console.Write("Customer Name: ");
-            string name = Console.ReadLine();
-            Console.Write("Customer Gender: ");
-            string gender = Console.ReadLine();
-            //birthday
-            Console.Write("Year of birth: ");
-            string y = Console.ReadLine();
-            int year = Int16.Parse(y);
-            Console.Write("Month of birth: ");
-            string m = Console.ReadLine();
-            int month = Int16.Parse(m);
-            Console.Write("Day of birth: ");
-            string d = Console.ReadLine();
-            int day = Int16.Parse(d);
-
             Name = name;
             Birthday = new DateTime(year, month, day);
             Age = DateTime.Today.Year - Birthday.Year;

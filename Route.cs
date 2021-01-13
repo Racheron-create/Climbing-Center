@@ -13,9 +13,10 @@ namespace Climbing
         public int Number { get; set; }
         public Route(string colour, string grade, int number)
         {
-            Number = number;
             Colour = colour;
             Grade = grade;
+            Number = number;
+            Number =  number;
         }
     }
 }
