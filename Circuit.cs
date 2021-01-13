@@ -14,6 +14,7 @@ namespace Climbing
         public Circuit(string colour, string[] inGrade)
         {
             Routes = new List<Route>();
+            Colour = colour;
             int numOfRoutes = inGrade.Length;
             for (int i = 0; i < numOfRoutes; i++)
             {

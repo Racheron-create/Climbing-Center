@@ -16,7 +16,6 @@ namespace Climbing
             Colour = colour;
             Grade = grade;
             Number = number;
-            Number =  number;
         }
     }
 }
