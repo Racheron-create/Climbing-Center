@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{CC964FCD-ACE9-4971-A12F-97A78309235C}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>SimpleColab</RootNamespace>
-    <AssemblyName>SimpleColab</AssemblyName>
+    <RootNamespace>Climbing</RootNamespace>
+    <AssemblyName>Climbing</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

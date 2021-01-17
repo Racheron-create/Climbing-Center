@@ -24,12 +24,14 @@ namespace Climbing
         }
 
         //creating a customer. Input validation needed
-        public void CreateCustomer(string name, string gender, int year, int month, int day)
+        public Customer CreateCustomer(string name, string gender, int year, int month, int day)
         {
             //add 1 to number of customers at the specific center
             CustomerCount++;
             //create the customer
-            Customers.Add(new Customer(CustomerCount, name, gender, year, month, day));
+            Customer newCustomer = new Customer(CustomerCount, name, gender, year, month, day);
+            Customers.Add(newCustomer);
+            return newCustomer;
         }
 
         public void RemoveCustomer(int number)
@@ -48,6 +50,17 @@ namespace Climbing
             });
             //remove customer if found
             if (x > -1) { Customers.RemoveAt(x); }
+        }
+
+        public void CustomerLogin(int number)
+        {
+            //loop over each customer
+            Customers.ForEach(delegate (Customer person) {
+                if (person.Number == number)
+                {
+                    person.SessionNumber++;
+                }
+            });
         }
 
         //create circuit and add it to dictionary of all circuits for center 

@@ -15,7 +15,10 @@ namespace Climbing
         public DateTime Birthday { get; set; }
         public int Age { get; set; }
         public int Number { get; set; }
+        public int SessionNumber { get; set; }
         public int Sends { get; set; }
+        public string HighestGrade { get; set; }
+        public string Average { get; set; }
         public int Attempts { get; set; }
         public Dictionary<string, List<string>> MySends { get; set; }
         public Dictionary<string, List<Route>> MyAttempts { get; set; }
@@ -30,13 +33,69 @@ namespace Climbing
             Attempts = 0;
             MySends = new Dictionary<string, List<string>>();
             MyAttempts = new Dictionary<string, List<Route>>();
+            SessionNumber = 0;
+            Average = "N/A";
+            HighestGrade = "N/A";
         }
+
+        public void AverageGrade()
+        {
+            Dictionary<string, List<string>> customerSends = MySends;
+            double count = 0;
+            double total = 0;
+            foreach (var sends in customerSends)
+            {
+                foreach(string grade in sends.Value)
+                {
+                    total += Int32.Parse(grade);
+                    count++;
+                }
+            }
+
+            double av = total / count;
+            double decpart = av - Math.Truncate(av);
+            int intpart = (int)Math.Truncate(av);
+
+            if (decpart < 0.3)
+            {
+                Average = ("V" + intpart);
+            }
+            else if(0.3<=decpart && decpart<=0.7)
+            {
+                Average = ("V" + intpart + "+");
+            }
+            else
+            {
+                Average = ("V" + intpart++);
+            }
+        }
+
+        public void MaxGrade()
+        {
+            Dictionary<string, List<string>> customerSends = MySends;
+            int max = 0;
+            foreach (var sends in customerSends)
+            {
+                foreach (string grade in sends.Value)
+                {
+                    int intgrad = Int32.Parse(grade);
+                    if (intgrad > max)
+                    {
+                        max = intgrad;
+                    }
+                }
+            }
+            HighestGrade = ("Your highest grade is " + max);
+        }
+
+
 
         //customer sends route, stored as string List<string>
         public void SendRoute(Center center, string colour, int number)
         {
             Dictionary<string, List<Route>> circuits = center.Circuits;
             List<Route> routes = circuits[colour];
+            number--;
             Route route = routes[number];
             string difficulty = route.Grade;
             if (MySends.TryGetValue(colour, out _))
@@ -55,6 +114,8 @@ namespace Climbing
             }
             Sends++;
             Attempts++;
+            MaxGrade();
+            AverageGrade();
         }
 
         //customer tries route, stored as string List<Route>
@@ -73,9 +134,9 @@ namespace Climbing
                 else
                 {
                     List<Route> newDifficulties = new List<Route>
-                {
-                    route
-                };
+                    {
+                        route
+                    };
                     MyAttempts.Add(colour, newDifficulties);
                 }
             }

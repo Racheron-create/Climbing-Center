@@ -11,20 +11,24 @@ namespace Climbing
         static void Main(string[] args)
         {
             Center depot = new Center("Depot");
-            depot.NewCircuit();
-            depot.DisplayCircuit();
+            string[] grades = new string[] {"1", "3","3","2","4"};
+            depot.NewCircuit("Red", grades);
+            depot.DisplayCircuit("Red");
 
-            Center foundry = new Center("Foundry");
-            foundry.NewCircuit();
-            foundry.DisplayCircuit();
+            Customer rachel = depot.CreateCustomer("Rachel", "Female", 2000, 05, 22);
+            Customer jamie =  depot.CreateCustomer("Jamie", "Wright", 1964, 05, 11);
+            List<Customer> customers = depot.Customers;
+            rachel.SendRoute(depot, "Red", 1);
+            rachel.SendRoute(depot, "Red", 3);
+            rachel.SendRoute(depot, "Red", 5);
 
-            depot.CreateCustomer();
-            depot.CreateCustomer();
+            Console.WriteLine("Rachel's average grade is " + rachel.AverageGrade());
+
+
+
             depot.RemoveCustomer(1);
 
             Console.WriteLine(depot.CustomerCount);
-            foundry.CreateCustomer();
-            Console.WriteLine(foundry.CustomerCount);
 
             Console.ReadLine();
         }
