@@ -88,8 +88,6 @@ namespace Climbing
             HighestGrade = ("Your highest grade is " + max);
         }
 
-
-
         //customer sends route, stored as string List<string>
         public void SendRoute(Center center, string colour, int number)
         {
